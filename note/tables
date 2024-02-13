@@ -1,0 +1,160 @@
+- employee
+    - Id
+    - FirstName
+    - LastName
+    - Gender
+    - Dob
+    - Tel
+    - Mail
+    - Address
+    - Status
+    - BaseSalary
+    - CreateAt
+    - LastDayAt
+- employee role // department
+    - Id
+    - LastName
+    - Code
+    - Status
+    - CreateAt
+    - CreateBy
+- employee permission
+  - Id
+  - Name
+  - Code
+  - Group
+  - Status
+  - CreateAt
+  - CreateBy
+- payroll
+    - Id
+    - Label // Jan-23
+    - AproveStatus
+    - AproveBy
+    - AproveAt
+    - CreateBy
+    - CreateAt
+- payroll_detail
+    - Id
+    - PayrollId
+    - EmployeeId
+    - BaseSalary
+    - Food
+    - Phone Card
+    - OT
+    - Bonus
+    - Total 
+- employee_review_history
+    - Id
+    - EmployeeId
+    - OldSalary
+    - IncreaseSalary
+    - ReviewAt
+    - CreateAt
+    - CreateBy
+
+- customer
+    - Id
+    - FirstName
+    - LastName
+    - Gender
+    - Dob
+    - Tel
+    - Email
+    - Address
+    - Status
+    - CreateAt
+    - CreateBy
+    - LastDayAt
+- Customer membershi
+- product category
+    - Id
+    - Name
+    - Description
+    - Status
+    - CreateAt
+    - CreateBy
+- product
+    - Id
+    - CategoryId
+    - BarCode
+    - Name
+    - Description
+    - price
+    - Status
+    - CreateAt
+    - CreateBy
+- Discount
+    - Id
+    - Label 
+    - FromDate
+    - ToDate
+    - CreateAt
+    - CreateBy
+- product promotion | discount
+    - Id
+    - DiscountId
+    - ProductId
+    - Discount (20%, 50%)
+- currency (usd kh)
+- shift
+    - Id
+    - EmployeeId
+    - CashIn
+    - CheckIngAt
+    - CloseAt
+- invoice
+    - Id
+    - InvoiceNo
+    - ShiftId
+    - PaymentMethodId
+    - CustomerId (optional)
+    - TotalAmount
+    - Status
+    - Paid
+    - CreateAt
+    - CreateBy
+- Invoice detail
+    - Id
+    - InvoiceId
+    - ProductId
+    - Price
+    - Qty
+    - Discount
+- Payment method
+    - Id
+    - Name 
+    - Code
+    - CreateAt
+    - CreateBy
+- Supplier
+    - Id
+    - Supplierid
+    - CompanyName
+    - Address
+    - Phone
+    - Email
+    - CreateAt
+    - CreateBy
+- Inventory
+    - Id
+    - ItemName
+    - ItemDecription
+    - Qty
+    - ExpireDate
+    - CreateAt
+    - CreateBy
+- Purchase
+    - Id
+    - SupplierId
+    - TotalAmount
+    - PurchaseDate
+    - CreateAt
+    - CreateBy
+- PurchaseDetail
+    - Id
+    - PurchaseId
+    - ItemId
+    - Qty
+- purchase_payment
+- outlet
