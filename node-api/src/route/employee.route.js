@@ -6,7 +6,7 @@ const employee = (app) => {
     app.post("/api/employee",emplyeeController.create)
     app.delete("/api/employee/:emp_id",emplyeeController.remove)
     app.put("/api/employee",emplyeeController.update)
-    app.post("/api/employee/setpassword",emplyeeController.setPassword)
+    app.post("/api/employee/SETpassword",emplyeeController.setPassword)
     app.post("/api/employee/login",emplyeeController.login)
 }
 
