@@ -3,20 +3,25 @@ import { useEffect, useState } from 'react';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    UserOutlined
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme } from 'antd';
+import { Layout, Menu, Button, theme, Space, Avatar } from 'antd';
+import { getCurrentUser } from '../../share/helper';
+import ColumnGroup from 'antd/es/table/ColumnGroup';
 const { Header, Sider, Content } = Layout;
 
 function MainLayout() {
-// turn to login page first
-    
-        const isLogin = localStorage.getItem("isLogin")
-        useEffect( ()=>{
-            if(isLogin == null || isLogin == "null"){
-                alert(isLogin)
-               window.location.href="/login"
-            }
-        },[])
+    // turn to login page first
+
+    const isLogin = localStorage.getItem("isLogin")
+    const user = getCurrentUser()
+    // console.log(user)
+    useEffect(() => {
+        if (isLogin == null || isLogin == "null") {
+            alert(isLogin)
+            window.location.href = "/login"
+        }
+    }, [])
 
     const [collapsed, setCollapsed] = useState(false);
     const {
@@ -29,12 +34,12 @@ function MainLayout() {
         navigate(pagename)
     }
 
-    const onLogout = () =>{
-            localStorage.setItem("isLogin", "null")
-            window.location.href="/login"
-} 
-  
- return (
+    const onLogout = () => {
+        localStorage.setItem("isLogin", "null")
+        window.location.href = "/login"
+    }
+     
+    return (
 
 
 
@@ -68,14 +73,14 @@ function MainLayout() {
                                 label: 'Login',
                                 onClick: () => onClickPage("/login")
                             },
-                            
+
                             {
                                 key: '4',
                                 // icon: <UploadOutlined />,
                                 label: 'Logout',
-                                onClick:()=>onLogout()
+                                onClick: () => onLogout()
                             },
-                            
+
                             {
                                 key: '5',
                                 // icon: <UploadOutlined />,
@@ -84,7 +89,7 @@ function MainLayout() {
 
                             }
                             ,
-                            
+
                             {
                                 key: '6',
                                 // icon: <UploadOutlined />,
@@ -96,23 +101,38 @@ function MainLayout() {
                     />
                 </Sider>
                 <Layout>
-                    <Header
-                        style = {{
-                            padding: 0,
-                            background: colorBgContainer,
-                        }}
-                    >
-                        <Button
-                            type="text"
-                            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                            onClick={() => setCollapsed(!collapsed)}
+                   
+                        
+                        <Header
                             style={{
-                                fontSize: '16px',
-                                width: 64,
-                                height: 64,
+                                padding: 0,
+                                background: colorBgContainer,
                             }}
-                        />
-                    </Header>
+                        > 
+                        <div>
+                            <div>
+                                <Button
+                                    type="text"
+                                    icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                                    onClick={() => setCollapsed(!collapsed)}
+                                    style={{
+                                        fontSize: '16px',
+                                        width: 64,
+                                        height: 64,
+                                    }}
+                                />
+                            </div>
+                            <div>
+
+
+                                <Avatar size="large" icon={<UserOutlined />} />
+                            </div>
+                            <div>
+                           
+                            </div>
+                        </div>
+                        </Header>
+                   
                     <Content
                         style={{
                             margin: '24px 16px',

@@ -1,13 +1,14 @@
 import { useState } from "react"
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
+import request, {} from '../../share/request'
 import styles from "./loginStyle.module.css"
 const LoginPage = () => {
 
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const Username = "sa"
-    const Password = "123"
+    // const [username, setUsername] = useState("")
+    // const [password, setPassword] = useState("")
+    // const Username = "sa"
+    // const Password = "123"
 
     // when username and password is correct
 
@@ -16,13 +17,23 @@ const LoginPage = () => {
        
   
 
-    const onFinish = (values) => {
-      const staticUsername = "sa", staticPassword="123";
-       if (values.username == staticUsername && values.password == staticPassword) {
+    const onFinish =async (values) => {
+      var param = {
+        "phone":values.username,
+        "password": values.password
+      }
+      const res = await request ("employee/login", "post", param)
+      
+      
+       if (res) {
+            // JSON.stringify(obj) convert object to string
+            // JSON.parse(obj) convert string obj to object json
+            localStorage.setItem("profile", JSON.stringify(res.profile))
             localStorage.setItem("isLogin", '1')
             window.location.href = "/"
+           
         } else {
-            alert("User and password is not correct.")
+            message.warning(res.message)
         }
     
     }

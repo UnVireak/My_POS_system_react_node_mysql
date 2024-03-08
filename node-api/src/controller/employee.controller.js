@@ -23,14 +23,14 @@ const login = async (req,res) => {
    
         const user = await checkExistUser(phone);
         if (!user) {
-            res.json({ message: "User does not exist." });
+            res.json({ message: "Username or password does not exist." });
         }else{
             // verify password(password from client, password in db)
             const isCorrectPassword = await bcrypt.compareSync(password, user.password)
             delete user.password
             res.json({
 
-                message: isCorrectPassword ? "Login success" : "Incorrect password",
+                message: isCorrectPassword ? "Login success" : "Username or password incorrect",
                 user: isCorrectPassword ? user : null
             })
         }
