@@ -3,19 +3,21 @@ import { useEffect, useState } from 'react';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UserOutlined
+    UserOutlined, DownOutlined,
+    SmileOutlined
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Space, Avatar } from 'antd';
+import { Layout, Menu, Button, theme, Space, Avatar, Dropdown } from 'antd';
 import { getCurrentUser } from '../../share/helper';
 import ColumnGroup from 'antd/es/table/ColumnGroup';
+import styles from "./Layout.module.css";
 const { Header, Sider, Content } = Layout;
 
 function MainLayout() {
     // turn to login page first
 
     const isLogin = localStorage.getItem("isLogin")
-    const user = getCurrentUser()
-    // console.log(user)
+    const user = getCurrentUser();
+
     useEffect(() => {
         if (isLogin == null || isLogin == "null") {
             alert(isLogin)
@@ -38,7 +40,56 @@ function MainLayout() {
         localStorage.setItem("isLogin", "null")
         window.location.href = "/login"
     }
-     
+
+    // User drop down
+    const items = [
+        {
+            key: '1',
+            label: (
+                <a
+                //   target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com"
+                >
+                    Profile
+                </a>
+            ),
+        },
+        {
+            key: '2',
+            label: (
+                <a
+                //   target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com"
+                >
+                    Change password
+                </a>
+            ),
+
+        },
+        {
+            key: '3',
+            label: (
+                <a
+                //   target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com"
+                >
+                    Setting
+                </a>
+            ),
+
+        },
+        {
+            key: '4',
+            danger: true,
+            label: (
+                <a
+                //   target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com "
+                >
+                    Logout
+                </a>
+            ),
+            onClick: () => onLogout()
+
+        },
+    ]
+
     return (
 
 
@@ -101,15 +152,15 @@ function MainLayout() {
                     />
                 </Sider>
                 <Layout>
-                   
-                        
-                        <Header
-                            style={{
-                                padding: 0,
-                                background: colorBgContainer,
-                            }}
-                        > 
-                        <div>
+
+
+                    <Header
+                        style={{
+                            padding: 0,
+                            background: colorBgContainer,
+                        }}
+                    >
+                        <div className={styles.contentHeader}>
                             <div>
                                 <Button
                                     type="text"
@@ -122,17 +173,31 @@ function MainLayout() {
                                     }}
                                 />
                             </div>
-                            <div>
 
-
-                                <Avatar size="large" icon={<UserOutlined />} />
-                            </div>
                             <div>
-                           
+                                <Space size={20}>
+                               
+
+                                <Dropdown
+                                    menu={{
+                                        items,
+                                    }}
+                                >
+
+                                    <a onClick={(e) => e.preventDefault()}>
+                                        <Space>
+                                            {user.emp_name}
+                                            <DownOutlined />
+                                        </Space>
+                                    </a>
+                                </Dropdown>
+                                 <Avatar size="large" icon={<UserOutlined />} />
+                                </Space>
                             </div>
+
                         </div>
-                        </Header>
-                   
+                    </Header>
+
                     <Content
                         style={{
                             margin: '24px 16px',

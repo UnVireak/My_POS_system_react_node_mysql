@@ -23,12 +23,11 @@ const LoginPage = () => {
         "password": values.password
       }
       const res = await request ("employee/login", "post", param)
-      
-      
        if (res) {
             // JSON.stringify(obj) convert object to string
             // JSON.parse(obj) convert string obj to object json
-            localStorage.setItem("profile", JSON.stringify(res.profile))
+            localStorage.setItem("user", JSON.stringify(res.user))
+
             localStorage.setItem("isLogin", '1')
             window.location.href = "/"
            
