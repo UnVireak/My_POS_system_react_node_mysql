@@ -147,11 +147,19 @@ const create = (req, res) => {
 
     } = req.body
     var filename = null
-    // if (req.file) {
-    //     filename = req.file.filename
-    // }
-    var sql = "INSERT INTO employee (emp_name, gender,role,address,phone) VALUE(?, ?, ?, ?, ?)"
-    var param = [emp_name, gender, role, address, phone];
+    if (req.file) {
+        filename = req.file.filename
+    }
+   
+    else{
+        res.json({
+        body : req.body,
+        file  : req.file
+    })
+}
+  
+    var sql = "INSERT INTO employee (emp_name, gender,role, emp_img, address,phone) VALUE(?, ?, ?, ?, ?, ?)"
+    var param = [emp_name, gender, role, filename, address, phone];
     db.query(sql, param, (error, rows) => {
         if (!error) {
             res.json({

@@ -1,13 +1,13 @@
 const multer = require("multer")
 
-const upload = () => multer ({
+const upload  = multer ({
     storage: multer.diskStorage ({
         destination: function (req, file, callback){
-            callback(null, "C:/xampp/htdocs/project")
+            callback(null, "C:/xampp/htdocs/project/img/")
         },
     filename: function (req, file, callback){
-        const uniqueSuffix = Date.noe() +"-"+ Math.round(Math.random() * 1E9)
-        callback(null,file.fieldname + "-" + uniqueSuffix)
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        callback(null, file.fieldname + '-' + uniqueSuffix)
     },
 
     }),
